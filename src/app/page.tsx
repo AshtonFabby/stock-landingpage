@@ -37,6 +37,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import Image from "next/image";
+import Link from "next/link";
 
 // --- Utility ---
 const formatZAR = (n: number) =>
@@ -92,12 +93,11 @@ export default function StockIgniteLanding() {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <Button
-              className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
-              onClick={() => (window.location.hash = "#apply")}
-            >
-              Apply in 2 minutes
-            </Button>
+            <Link target="_blank" href="https://apply.getfunds.co.za">
+              <Button className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
+                Apply in 2 minutes
+              </Button>
+            </Link>
           </div>
         </div>
       </header>
