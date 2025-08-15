@@ -36,6 +36,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import Image from "next/image";
 
 // --- Utility ---
 const formatZAR = (n: number) =>
@@ -46,7 +47,7 @@ const formatZAR = (n: number) =>
   }).format(n || 0);
 
 // Simple repayment model: weekly fixed fee % over 13 weeks with optional early settlement (100% fee discount)
-function calcPlan(amount: number, flatFeePct: number = 6, weeks: number = 13) {
+function calcPlan(amount: number, flatFeePct: number = 10, weeks: number = 12) {
   const flatFee = amount * (flatFeePct / 100);
   const total = amount + flatFee;
   const weekly = total / weeks;
@@ -55,8 +56,8 @@ function calcPlan(amount: number, flatFeePct: number = 6, weeks: number = 13) {
 
 export default function StockIgniteLanding() {
   const [amount, setAmount] = useState<number>(150000);
-  const [feePct, setFeePct] = useState<number>(6); // example fee for illustration
-  const plan = useMemo(() => calcPlan(amount, feePct, 13), [amount, feePct]);
+  const [feePct, setFeePct] = useState<number>(10); // example fee for illustration
+  const plan = useMemo(() => calcPlan(amount, feePct, 12), [amount, feePct]);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white text-slate-900">
@@ -64,10 +65,12 @@ export default function StockIgniteLanding() {
       <header className="sticky top-0 z-40 backdrop-blur bg-white/70 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <div className="h-9 w-9 rounded-2xl bg-slate-900 text-white grid place-items-center font-bold">
-              GF
-            </div>
-            <span className="font-semibold">Get Funds</span>
+            <Image
+              src="/images/getfunds-logo.png"
+              alt="Stock Ignite"
+              width={135}
+              height={36}
+            />
             <span className="mx-2 text-slate-300">|</span>
             <span className="font-semibold text-slate-700">Stock Ignite</span>
           </div>
@@ -90,7 +93,7 @@ export default function StockIgniteLanding() {
           </div>
           <div className="flex items-center gap-3">
             <Button
-              className="rounded-2xl"
+              className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
               onClick={() => (window.location.hash = "#apply")}
             >
               Apply in 2 minutes
@@ -111,7 +114,7 @@ export default function StockIgniteLanding() {
                 className="text-4xl sm:text-5xl font-extrabold tracking-tight"
               >
                 Buy stock now.{" "}
-                <span className="text-slate-500">Pay over 3 months.</span>
+                <span className="text-[#07d159]">Pay over 3 months.</span>
               </motion.h1>
               <p className="mt-4 text-lg text-slate-600 max-w-2xl">
                 For fast sales cycles and healthy margins.{" "}
@@ -122,7 +125,7 @@ export default function StockIgniteLanding() {
               <div className="mt-6 flex flex-wrap gap-3">
                 <Button
                   size="lg"
-                  className="rounded-2xl"
+                  className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
                   onClick={() => (window.location.hash = "#apply")}
                 >
                   <Zap className="mr-2 h-5 w-5" /> Apply in 2 minutes
@@ -157,7 +160,7 @@ export default function StockIgniteLanding() {
               <Card className="rounded-3xl shadow-xl">
                 <CardHeader>
                   <CardTitle className="flex items-center gap-2">
-                    <Sparkles /> Quick estimate
+                    <Sparkles className="text-[#07d159]" /> Quick estimate
                   </CardTitle>
                   <CardDescription>
                     Illustration only. Final pricing subject to assessment.
@@ -228,7 +231,7 @@ export default function StockIgniteLanding() {
                     </Card>
                   </div>
                   <Button
-                    className="mt-4 w-full rounded-2xl"
+                    className="mt-4 w-full rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
                     onClick={() => (window.location.hash = "#apply")}
                   >
                     Get my offer <ChevronRight className="ml-1 h-4 w-4" />
@@ -276,32 +279,32 @@ export default function StockIgniteLanding() {
           <div className="mt-10 grid md:grid-cols-3 gap-6">
             {[
               {
-                icon: <TrendingUp className="h-6 w-6" />,
+                icon: <TrendingUp className="h-6 text-[#07d159] w-6" />,
                 title: "Explode your inventory turns",
                 desc: "Buy what sells now and convert it within a 3‑month horizon.",
               },
               {
-                icon: <HandCoins className="h-6 w-6" />,
+                icon: <HandCoins className="h-6 text-[#07d159] w-6" />,
                 title: "Weekly, predictable repayments",
-                desc: "13 equal weekly debits to match your cashflow.",
+                desc: "12 equal weekly debits to match your cashflow.",
               },
               {
-                icon: <Percent className="h-6 w-6" />,
+                icon: <Percent className="h-6 text-[#07d159] w-6" />,
                 title: "100% early‑settlement discount",
                 desc: "Settle early and pay zero remaining fees — a true first.",
               },
               {
-                icon: <Clock3 className="h-6 w-6" />,
+                icon: <Clock3 className="h-6 text-[#07d159] w-6" />,
                 title: "Same‑day payout",
                 desc: "Approved today, stocked today.",
               },
               {
-                icon: <ShieldCheck className="h-6 w-6" />,
+                icon: <ShieldCheck className="h-6 text-[#07d159] w-6" />,
                 title: "Transparent pricing",
                 desc: "Flat fees, no compounding, no surprises.",
               },
               {
-                icon: <RefreshCcw className="h-6 w-6" />,
+                icon: <RefreshCcw className="h-6 text-[#07d159] w-6" />,
                 title: "Reignite anytime",
                 desc: "Use, settle, and repeat — as your cycle demands.",
               },
@@ -332,17 +335,17 @@ export default function StockIgniteLanding() {
               {
                 title: "Apply in 2 minutes",
                 desc: "Basic business info and 3 months bank statements.",
-                icon: <Zap className="h-5 w-5" />,
+                icon: <Zap className="h-5 w-5 text-[#07d159]" />,
               },
               {
                 title: "Get an offer",
                 desc: "We assess quickly and send your 3‑month plan.",
-                icon: <Sparkles className="h-5 w-5" />,
+                icon: <Sparkles className="h-5 w-5 text-[#07d159]" />,
               },
               {
                 title: "Get stock, repay weekly",
-                desc: "Same‑day payout. 13 weekly debits. Settle anytime.",
-                icon: <CalendarClock className="h-5 w-5" />,
+                desc: "Same‑day payout. 12 weekly debits. Settle anytime.",
+                icon: <CalendarClock className="h-5 w-5 text-[#07d159]" />,
               },
             ].map((s, i) => (
               <Card key={i} className="rounded-2xl h-full">
@@ -393,7 +396,7 @@ export default function StockIgniteLanding() {
                 </div>
                 <div>
                   <Label>Term</Label>
-                  <Input value="3 months • 13 weeks" readOnly />
+                  <Input value="3 months • 12 weeks" readOnly />
                 </div>
               </div>
               <div className="mt-6 grid sm:grid-cols-3 gap-4">
@@ -436,7 +439,7 @@ export default function StockIgniteLanding() {
                     ))}
                   </ul>
                   <Button
-                    className="mt-4 w-full rounded-2xl"
+                    className="mt-4 w-full rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
                     onClick={() => (window.location.hash = "#apply")}
                   >
                     Check my eligibility
@@ -463,7 +466,7 @@ export default function StockIgniteLanding() {
                   <Zap className="h-4 w-4 mt-0.5" /> 2‑minute online application
                 </li>
                 <li className="flex gap-2 items-start">
-                  <Clock3 className="h-4 w-4 mt-0.5" /> 3‑month term • 13 weekly
+                  <Clock3 className="h-4 w-4 mt-0.5" /> 3‑month term • 12 weekly
                   debits
                 </li>
                 <li className="flex gap-2 items-start">
@@ -503,7 +506,7 @@ export default function StockIgniteLanding() {
                     <Label>Stock amount needed</Label>
                     <Input type="number" placeholder="R 150,000" />
                   </div>
-                  <Button className="mt-2 rounded-2xl">
+                  <Button className="mt-2 rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
                     Submit & get a call back
                   </Button>
                   <p className="text-xs text-slate-500">
@@ -592,8 +595,8 @@ export default function StockIgniteLanding() {
                 you structure it around your sales cycle.
               </p>
               <div className="mt-4 flex flex-wrap gap-3">
-                <Button className="rounded-2xl">
-                  <Phone className="mr-2 h-4 w-4" /> Request a call
+                <Button className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
+                  <Phone className="mr-2 h-4 w-4 " /> Request a call
                 </Button>
                 <Button variant="outline" className="rounded-2xl">
                   <Rocket className="mr-2 h-4 w-4" /> Book a demo
@@ -610,7 +613,7 @@ export default function StockIgniteLanding() {
                   <ul className="space-y-2 text-sm">
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 mt-0.5" /> Term: 3 months
-                      • 13 weekly debits
+                      • 12 weekly debits
                     </li>
                     <li className="flex items-start gap-2">
                       <CheckCircle2 className="h-4 w-4 mt-0.5" /> Same‑day
