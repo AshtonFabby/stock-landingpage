@@ -48,7 +48,7 @@ const formatZAR = (n: number) =>
   }).format(n || 0);
 
 // Simple repayment model: weekly fixed fee % over 13 weeks with optional early settlement (100% fee discount)
-function calcPlan(amount: number, flatFeePct: number = 10, weeks: number = 12) {
+function calcPlan(amount: number, flatFeePct: number = 12, weeks: number = 12) {
   const flatFee = amount * (flatFeePct / 100);
   const total = amount + flatFee;
   const weekly = total / weeks;
@@ -57,7 +57,7 @@ function calcPlan(amount: number, flatFeePct: number = 10, weeks: number = 12) {
 
 export default function StockIgniteLanding() {
   const [amount, setAmount] = useState<number>(150000);
-  const [feePct, setFeePct] = useState<number>(10); // example fee for illustration
+  const [feePct, setFeePct] = useState<number>(12); // example fee for illustration
   const plan = useMemo(() => calcPlan(amount, feePct, 12), [amount, feePct]);
 
   return (
