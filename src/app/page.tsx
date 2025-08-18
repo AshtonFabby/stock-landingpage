@@ -452,16 +452,16 @@ export default function StockIgniteLanding() {
       </section>
 
       {/* CTA */}
-      <section id="apply" className="py-16 bg-slate-900 text-white">
+      <section id="apply" className="py-16 bg-white text-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-10 items-center">
             <div>
               <h3 className="text-3xl font-bold">Ready to stock up?</h3>
-              <p className="mt-2 text-white/80">
+              <p className="mt-2 text-slate-600">
                 Apply now and get a same‑day decision. If approved, we pay out
                 the same day so you can place orders immediately.
               </p>
-              <ul className="mt-4 space-y-2 text-white/80 text-sm">
+              <ul className="mt-4 space-y-2 text-slate-600 text-sm">
                 <li className="flex gap-2 items-start">
                   <Zap className="h-4 w-4 mt-0.5" /> 2‑minute online application
                 </li>
@@ -475,7 +475,7 @@ export default function StockIgniteLanding() {
                 </li>
               </ul>
             </div>
-            <Card className="bg-white text-slate-900 rounded-2xl">
+            <Card className="bg-slate-50 text-slate-900 rounded-2xl shadow-lg">
               <CardHeader>
                 <CardTitle>Start your application</CardTitle>
                 <CardDescription>
