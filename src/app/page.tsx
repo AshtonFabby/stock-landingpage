@@ -123,21 +123,21 @@ export default function StockIgniteLanding() {
                 anytime and save.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Button
-                  size="lg"
-                  className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
-                  onClick={() => (window.location.hash = "#apply")}
-                >
-                  <Zap className="mr-2 h-5 w-5" /> Apply in 2 minutes
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="rounded-2xl"
-                  onClick={() => (window.location.hash = "#contact")}
-                >
-                  <Phone className="mr-2 h-5 w-5" /> Talk to a human
-                </Button>
+                <Link href={"https://apply.getfunds.co.za"}>
+                  <Button
+                    size="lg"
+                    className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
+                    onClick={() => (window.location.hash = "#apply")}
+                  >
+                    <Zap className="mr-2 h-5 w-5" /> Apply in 2 minutes
+                  </Button>
+                </Link>
+
+                <Link href="tel:0658676087">
+                  <Button size="lg" variant="outline" className="rounded-2xl">
+                    <Phone className="mr-2 h-5 w-5" /> Talk to a human
+                  </Button>
+                </Link>
               </div>
               <div className="mt-6 flex items-center gap-4 text-sm text-slate-500">
                 <div className="flex items-center gap-2">
@@ -156,6 +156,7 @@ export default function StockIgniteLanding() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="lg:pl-8"
+              id="quick-estimate"
             >
               <Card className="rounded-3xl shadow-xl">
                 <CardHeader>
@@ -230,12 +231,11 @@ export default function StockIgniteLanding() {
                       </CardContent>
                     </Card>
                   </div>
-                  <Button
-                    className="mt-4 w-full rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
-                    onClick={() => (window.location.hash = "#apply")}
-                  >
-                    Get my offer <ChevronRight className="ml-1 h-4 w-4" />
-                  </Button>
+                  <Link href={"https://apply.getfunds.co.za"}>
+                    <Button className="mt-4 w-full rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
+                      Get my offer <ChevronRight className="ml-1 h-4 w-4" />
+                    </Button>
+                  </Link>
                   <p className="mt-2 text-xs text-slate-500">
                     Same‑day payouts once approved. Most applications take ~2
                     minutes.
@@ -440,7 +440,7 @@ export default function StockIgniteLanding() {
                   </ul>
                   <Button
                     className="mt-4 w-full rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
-                    onClick={() => (window.location.hash = "#apply")}
+                    onClick={() => (window.location.hash = "#quick-estimate")}
                   >
                     Check my eligibility
                   </Button>
@@ -483,36 +483,73 @@ export default function StockIgniteLanding() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form className="grid gap-3">
+                <form
+                  className="grid gap-3"
+                  action="https://formsubmit.co/info@getfunds.co.za"
+                  method="POST"
+                >
                   <div>
-                    <Label>Business name</Label>
-                    <Input placeholder="e.g. Sunshine Traders (Pty) Ltd" />
+                    <Label htmlFor="business">Business name</Label>
+                    <Input
+                      name="Business Name"
+                      id="business"
+                      placeholder="e.g. Sunshine Traders (Pty) Ltd"
+                      required
+                    />
                   </div>
                   <div className="grid sm:grid-cols-2 gap-3">
                     <div>
-                      <Label>Contact person</Label>
-                      <Input placeholder="Full name" />
+                      <Label htmlFor="contact">Contact person</Label>
+                      <Input
+                        name="Contact Person"
+                        id="contact"
+                        placeholder="Full name"
+                        required
+                      />
                     </div>
                     <div>
-                      <Label>Phone</Label>
-                      <Input type="tel" placeholder="0XX XXX XXXX" />
+                      <Label htmlFor="phone">Phone</Label>
+                      <Input
+                        name="Phone"
+                        id="phone"
+                        type="tel"
+                        placeholder="0XX XXX XXXX"
+                        required
+                      />
                     </div>
                   </div>
                   <div>
-                    <Label>Email</Label>
-                    <Input type="email" placeholder="name@company.co.za" />
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      name="Email"
+                      id="email"
+                      type="email"
+                      placeholder="name@company.co.za"
+                      required
+                    />
                   </div>
                   <div>
-                    <Label>Stock amount needed</Label>
-                    <Input type="number" placeholder="R 150,000" />
+                    <Label htmlFor="amount">Stock amount needed</Label>
+                    <Input
+                      name="Stock Amount Needed"
+                      id="amount"
+                      type="number"
+                      placeholder="R 150,000"
+                      required
+                    />
                   </div>
-                  <Button className="mt-2 rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
+                  <Button
+                    type="submit"
+                    className="mt-2 rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
+                  >
                     Submit & get a call back
                   </Button>
                   <p className="text-xs text-slate-500">
                     By submitting you agree to our standard assessment terms and
                     privacy policy.
                   </p>
+                  {/* Optional: Add a hidden input for redirect after submit */}
+                  {/* <input type="hidden" name="_next" value="https://yourdomain.com/thank-you" /> */}
                 </form>
               </CardContent>
             </Card>
