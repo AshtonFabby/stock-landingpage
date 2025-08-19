@@ -429,7 +429,7 @@ export default function StockIgniteLanding() {
                       "South African SME trading 6+ months",
                       "Monthly turnover typically R80k+",
                       "Sales with fast sell‑through (retail, ecommerce, wholesalers)",
-                      "Bank statements (last 3 months)",
+                      "Bank statements (last 6 months)",
                       "No severe adverse listings in last 6 months",
                     ].map((t, i) => (
                       <li key={i} className="flex items-start gap-2">
@@ -538,6 +538,11 @@ export default function StockIgniteLanding() {
                       required
                     />
                   </div>
+                  <input
+                    type="hidden"
+                    name="_next"
+                    value="https://getfunds.co.za"
+                  />
                   <Button
                     type="submit"
                     className="mt-2 rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
@@ -549,7 +554,7 @@ export default function StockIgniteLanding() {
                     privacy policy.
                   </p>
                   {/* Optional: Add a hidden input for redirect after submit */}
-                  {/* <input type="hidden" name="_next" value="https://yourdomain.com/thank-you" /> */}
+                  {/* ...existing code... */}
                 </form>
               </CardContent>
             </Card>
