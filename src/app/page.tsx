@@ -209,7 +209,7 @@ export default function StockIgniteLanding() {
                     <Card className="bg-slate-50 border-dashed rounded-2xl">
                       <CardContent className="p-4">
                         <div className="text-sm text-slate-500">
-                          Total repay
+                          Total repayment
                         </div>
                         <div className="text-2xl font-semibold">
                           {formatZAR(plan.total)}
