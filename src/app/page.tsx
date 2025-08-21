@@ -187,6 +187,7 @@ export default function StockIgniteLanding() {
                         id="fee"
                         type="number"
                         value={feePct}
+                        disabled
                         onChange={(e) => setFeePct(Number(e.target.value))}
                         min={1}
                         max={15}
@@ -387,6 +388,7 @@ export default function StockIgniteLanding() {
                   <Label>Flat fee % (example)</Label>
                   <Input
                     type="number"
+                    disabled
                     value={feePct}
                     onChange={(e) => setFeePct(Number(e.target.value))}
                     min={1}
