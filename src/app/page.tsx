@@ -93,7 +93,10 @@ export default function StockIgniteLanding() {
             </a>
           </div>
           <div className="flex items-center gap-3">
-            <Link target="_blank" href="https://apply.getfunds.co.za">
+            <Link
+              target="_blank"
+              href="https://apply.getfunds.co.za?broker=stock-ignite"
+            >
               <Button className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
                 Apply in 2 minutes
               </Button>
@@ -123,7 +126,7 @@ export default function StockIgniteLanding() {
                 anytime and save.
               </p>
               <div className="mt-6 flex flex-wrap gap-3">
-                <Link href={"https://apply.getfunds.co.za"}>
+                <Link href={"https://apply.getfunds.co.za?broker=stock-ignite"}>
                   <Button
                     size="lg"
                     className="rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
@@ -232,7 +235,9 @@ export default function StockIgniteLanding() {
                       </CardContent>
                     </Card>
                   </div>
-                  <Link href={"https://apply.getfunds.co.za"}>
+                  <Link
+                    href={"https://apply.getfunds.co.za?broker=stock-ignite"}
+                  >
                     <Button className="mt-4 w-full rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white">
                       Get my offer <ChevronRight className="ml-1 h-4 w-4" />
                     </Button>
