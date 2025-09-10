@@ -58,6 +58,8 @@ function calcPlan(amount: number, flatFeePct: number = 12, weeks: number = 12) {
 export default function StockIgniteLanding() {
   const [amount, setAmount] = useState<number>(150000);
   const [feePct, setFeePct] = useState<number>(12); // example fee for illustration
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
   const plan = useMemo(() => calcPlan(amount, feePct, 12), [amount, feePct]);
 
   return (
@@ -490,79 +492,119 @@ export default function StockIgniteLanding() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form
-                  className="grid gap-3"
-                  action="https://formsubmit.co/info@getfunds.co.za"
-                  method="POST"
-                >
-                  <div>
-                    <Label htmlFor="business">Business name</Label>
-                    <Input
-                      name="Business Name"
-                      id="business"
-                      placeholder="e.g. Sunshine Traders (Pty) Ltd"
-                      required
-                    />
+                {formSuccess ? (
+                  <div className="p-4 bg-green-100 text-green-800 rounded-xl text-center">
+                    <b>Thank you!</b> Our team will call you back soon.
                   </div>
-                  <div className="grid sm:grid-cols-2 gap-3">
-                    <div>
-                      <Label htmlFor="contact">Contact person</Label>
-                      <Input
-                        name="Contact Person"
-                        id="contact"
-                        placeholder="Full name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="phone">Phone</Label>
-                      <Input
-                        name="Phone"
-                        id="phone"
-                        type="tel"
-                        placeholder="0XX XXX XXXX"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      name="Email"
-                      id="email"
-                      type="email"
-                      placeholder="name@company.co.za"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="amount">Stock amount needed</Label>
-                    <Input
-                      name="Stock Amount Needed"
-                      id="amount"
-                      type="number"
-                      placeholder="R 150,000"
-                      required
-                    />
-                  </div>
-                  <input
-                    type="hidden"
-                    name="_next"
-                    value="https://getfunds.co.za"
-                  />
-                  <Button
-                    type="submit"
-                    className="mt-2 rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
+                ) : (
+                  <form
+                    className="grid gap-3"
+                    onSubmit={async (e) => {
+                      e.preventDefault();
+                      setFormError(null);
+                      const form = e.currentTarget;
+                      const data = {
+                        business_name: form.business.value,
+                        name: form.contact.value,
+                        phone_number: form.phone.value,
+                        email: form.email.value,
+                        required_amount: form.amount.value,
+                        column: "lead",
+                        campaign_id: "stock-ignite-landingpage",
+                      };
+                      try {
+                        const res = await fetch(
+                          "https://clownfish-app-zbmnt.ondigitalocean.app/api/collections/leads/records",
+                          {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                          }
+                        );
+                        if (res.ok) {
+                          setFormSuccess(true);
+                          form.reset();
+                        } else {
+                          setFormError(
+                            "There was a problem submitting your application. Please try again."
+                          );
+                        }
+                      } catch (err) {
+                        setFormError("Network error. Please try again later.");
+                      }
+                    }}
                   >
-                    Submit & get a call back
-                  </Button>
-                  <p className="text-xs text-slate-500">
-                    By submitting you agree to our standard assessment terms and
-                    privacy policy.
-                  </p>
-                  {/* Optional: Add a hidden input for redirect after submit */}
-                  {/* ...existing code... */}
-                </form>
+                    <div>
+                      <Label htmlFor="business">Business name</Label>
+                      <Input
+                        name="business"
+                        id="business"
+                        placeholder="e.g. Sunshine Traders (Pty) Ltd"
+                        required
+                      />
+                    </div>
+                    <div className="grid sm:grid-cols-2 gap-3">
+                      <div>
+                        <Label htmlFor="contact">Contact person</Label>
+                        <Input
+                          name="contact"
+                          id="contact"
+                          placeholder="Full name"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="phone">Phone</Label>
+                        <Input
+                          name="phone"
+                          id="phone"
+                          type="tel"
+                          placeholder="0XX XXX XXXX"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        name="email"
+                        id="email"
+                        type="email"
+                        placeholder="name@company.co.za"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="amount">Stock amount needed</Label>
+                      <Input
+                        name="amount"
+                        id="amount"
+                        type="number"
+                        placeholder="R 150,000"
+                        required
+                      />
+                    </div>
+                    {formError && (
+                      <div className="p-2 bg-red-100 text-red-700 rounded mb-2 text-center">
+                        {formError}
+                      </div>
+                    )}
+                    <Button
+                      type="submit"
+                      className="mt-2 rounded-2xl bg-[#07d159] hover:bg-[#05b147] text-white"
+                    >
+                      Submit & get a call back
+                    </Button>
+                    <p className="text-xs text-slate-500">
+                      By submitting you agree to our standard assessment terms
+                      and privacy policy.
+                    </p>
+                    {/* Optional: Add a hidden input for redirect after submit */}
+                    {/* ...existing code... */}
+                  </form>
+                )}
               </CardContent>
             </Card>
           </div>
